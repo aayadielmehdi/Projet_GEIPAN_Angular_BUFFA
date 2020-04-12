@@ -87,6 +87,52 @@ app.get('/api/connection', function (req, res) {
 // Récupération des cas en passant des critére de recherche
 app.get('/api/cases', function (req, res) {
 
+    // numero de la page     
+    let pageindex = parseInt(req.query.pageindex);
+    // taille du tableau 
+    let pagesize = parseInt(req.query.pagesize);
+
+    let annee = req.query.annee;
+    let mois = req.query.mois;
+    let jour = req.query.jour;
+    let numEtude = req.query.numEtude;
+    let nomDossier = req.query.nomDossier;
+    let zoneNom = req.query.zoneNom;
+    let zoneCode = req.query.zoneCode;
+
+    // ?
+    // i use indefined car dans le front cases.services je laise les donnee en undefined car c'est two way dinding
+    // si par défault '' il ne retourne des fois des donnée de la base alors que j'ai rien saisie
+
+    let chainedequery = '{'
+    chainedequery += (annee != undefined) ? `"cas_AAAA" : "${annee}",` : ``
+    chainedequery += (mois != undefined) ? `"cas_MM" : "${mois}",` : ``
+    chainedequery += (jour != undefined) ? `"cas_JJ" : "${jour}",` : ``
+    chainedequery += (numEtude != undefined) ? `"cas_numEtude" : "${numEtude}",` : ``
+    chainedequery += (nomDossier != undefined) ? `"cas_nom_dossier" : "${nomDossier}",` : ``
+    chainedequery += (zoneNom != undefined) ? `"cas_zone_nom" : "${zoneNom}",` : ``
+    chainedequery += (zoneCode != undefined) ? `"cas_zone_code" : "${zoneCode}",` : ``
+    chainedequery = (chainedequery.length > 1) ? chainedequery.substring(0, chainedequery.length - 1) : chainedequery
+    chainedequery += '}'
+
+    // console.log(chainedequery)
+
+    let query = JSON.parse(chainedequery)
+
+    // console.log(query)
+
+    mongoDBModule.EnsembleDesCas(pageindex ,pagesize ,query, function (data) {
+        var objdData = {
+            msg: "Cas trouvés avec succès",
+            data: data
+        }
+        res.send(JSON.stringify(objdData));
+    });
+});
+
+// Récupération du count des cas
+app.get('/api/cases/count', function (req, res) {    
+   
     let annee = req.query.annee;
     let mois = req.query.mois;
     let jour = req.query.jour;
@@ -106,16 +152,12 @@ app.get('/api/cases', function (req, res) {
     chainedequery = (chainedequery.length > 1) ? chainedequery.substring(0, chainedequery.length - 1) : chainedequery
     chainedequery += '}'
 
-    // console.log(chainedequery)
-
     let query = JSON.parse(chainedequery)
 
-    // console.log(query)
-
-    mongoDBModule.EnsembleDesCas(query, function (data) {
+    mongoDBModule.CountCases(query, function (data) {
         var objdData = {
             msg: "Cas trouvés avec succès",
-            data: data
+            count: data
         }
         res.send(JSON.stringify(objdData));
     });
@@ -155,6 +197,27 @@ app.get('/api/zonenom', function (req, res) {
 // Récuperation des ZoneCode
 app.get('/api/zonecode', function (req, res) {
     mongoDBModule.GetZoneCode(function (data) {
+        res.send(JSON.stringify(data));
+    });
+});
+
+// Récuperation des ZoneCode
+app.get('/api/JJ', function (req, res) {
+    mongoDBModule.GetJJ(function (data) {
+        res.send(JSON.stringify(data));
+    });
+});
+
+// Récuperation des ZoneCode
+app.get('/api/MM', function (req, res) {
+    mongoDBModule.GetMM(function (data) {
+        res.send(JSON.stringify(data));
+    });
+});
+
+// Récuperation des ZoneCode
+app.get('/api/AAAA', function (req, res) {
+    mongoDBModule.GetAAAA(function (data) {
         res.send(JSON.stringify(data));
     });
 });

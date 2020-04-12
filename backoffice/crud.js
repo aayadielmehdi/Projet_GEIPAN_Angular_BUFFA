@@ -20,13 +20,30 @@ exports.connexionMongo = function (callback) {
 }
 
 // Récupération de tous les cas 
-exports.EnsembleDesCas = function (query, callback) {
+exports.EnsembleDesCas = function (pageindex,pagesize,query, callback) {
 	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
 		var db = client.db(dbName);
 		if (!err) {
 			db.collection(variable.collection_cas)
 				.find(query)
+				.skip(pageindex * pagesize)
+				.limit(pagesize)
 				.toArray()
+				.then(arr => callback(arr))
+		} else {
+			callback(-1)
+		}
+	})
+}
+
+// count de l'ensemble des cas selon critère de recherche
+exports.CountCases = function(query, callback) {
+	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+		var db = client.db(dbName);
+		if (!err) {
+			db.collection(variable.collection_cas)
+				.find(query)
+				.count()				
 				.then(arr => callback(arr))
 		} else {
 			callback(-1)
@@ -157,6 +174,48 @@ exports.GetZoneCode = function (callback) {
 		if (!err) {
 			db.collection(variable.collection_cas)
 				.distinct("cas_zone_code")
+				.then(arr => callback(arr))
+		} else {
+			callback(-1)
+		}
+	})
+}
+
+// Récupération des JJ
+exports.GetJJ = function (callback) {
+	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+		var db = client.db(dbName);
+		if (!err) {
+			db.collection(variable.collection_cas)
+				.distinct("cas_JJ")
+				.then(arr => callback(arr))
+		} else {
+			callback(-1)
+		}
+	})
+}
+
+// Récupération des MM
+exports.GetMM = function (callback) {
+	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+		var db = client.db(dbName);
+		if (!err) {
+			db.collection(variable.collection_cas)
+				.distinct("cas_MM")
+				.then(arr => callback(arr))
+		} else {
+			callback(-1)
+		}
+	})
+}
+
+// Récupération des AAAA
+exports.GetAAAA = function (callback) {
+	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+		var db = client.db(dbName);
+		if (!err) {
+			db.collection(variable.collection_cas)
+				.distinct("cas_AAAA")
 				.then(arr => callback(arr))
 		} else {
 			callback(-1)
