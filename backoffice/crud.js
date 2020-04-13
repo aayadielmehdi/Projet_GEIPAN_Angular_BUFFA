@@ -240,3 +240,28 @@ exports.GetAAAA = function (callback) {
 		}
 	})
 }
+
+
+////// utilisation de cette partie pour affichage des stats
+
+// count des cas selon classification
+exports.RepartitionCasParClassification = function (callback) {
+	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+		var db = client.db(dbName);
+		if (!err) {
+			db.collection(variable.collection_cas)
+				.aggregate([
+					{
+						$group:{
+							_id : "$cas_classification",
+							count : { $sum : 1 }
+						}
+					}
+				])
+				.toArray()				
+				.then(arr => callback(arr))
+		} else {
+			callback(-1)
+		}
+	})
+}

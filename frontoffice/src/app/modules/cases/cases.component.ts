@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CasesService } from '../cases.service'
+import { CasesService } from '../services/cases.service'
 import { PageEvent } from '@angular/material/paginator'
 
 @Component({

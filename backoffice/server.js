@@ -235,3 +235,10 @@ app.get('/api/AAAA', function (req, res) {
         res.send(JSON.stringify(data));
     });
 });
+
+// Répartition cas par classification
+app.get('/api/RepCasParClassification',function(req,res){
+    mongoDBModule.RepartitionCasParClassification(function (data) {
+        res.send(JSON.stringify(data));
+    });
+})

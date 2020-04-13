@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TemoignagesCasService } from '../temoignages-cas.service';
+import { TemoignagesCasService } from '../services/temoignages-cas.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({

@@ -24,12 +24,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule}  from '@angular/forms'
 
 
-import { DashboardService } from 'src/app/modules/dashboard.service';
+import { DashboardService } from 'src/app/modules/services/dashboard.service';
 import { CasesComponent } from 'src/app/modules/cases/cases.component';
 import { MatIconModule } from '@angular/material/icon';
-import { CasesService } from 'src/app/modules/cases.service';
+import { CasesService } from 'src/app/modules/services/cases.service';
 import { TemoignagesCasComponent } from 'src/app/modules/temoignages-cas/temoignages-cas.component';
-import { TemoignagesCasService } from 'src/app/modules/temoignages-cas.service';
+import { TemoignagesCasService } from 'src/app/modules/services/temoignages-cas.service';
 
 
 

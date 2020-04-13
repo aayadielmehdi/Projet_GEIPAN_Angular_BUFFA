@@ -20,6 +20,9 @@ export class PieComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    // console.log(this.data)
+
     this.chartOptions = {
       chart: {
         plotBackgroundColor: null,
@@ -28,7 +31,10 @@ export class PieComponent implements OnInit {
         type: 'pie'
       },
       title: {
-        text: 'Test Pie'
+        text: 'Stats par types de cas'
+      },
+      subtitle: {
+        text: 'Répartition par classification'
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -48,14 +54,14 @@ export class PieComponent implements OnInit {
           }
         }
       },
-      exporting:{
-        enabled : true,
+      exporting: {
+        enabled: true,
       },
-      credits:{
-        enabled : false,
+      credits: {
+        enabled: false,
       },
       series: [{
-        name: 'Brands',
+        name: 'Pourcentage',
         colorByPoint: true,
         data: this.data
       }]
@@ -76,5 +82,13 @@ export class PieComponent implements OnInit {
 
   }
 
+
+  // le binding ne marche pas avec highchart faut faire le setData
+  ngAfterContentInit(): void {    
+    //this.chartOptions.series[0].setData(this.data)
+    console.log("(AAYADI) Erreur au niveau du dashbord vient de mise a jour data graphe , le binding auto ne marche pas !!")
+    this.Highcharts.Series[0].setData(this.data)
+    
+  }
 
 }
