@@ -3,14 +3,14 @@ Depuis l'affaire Roswell les observations d'objets celestes non identifés se so
 
 # Réalisé Par
 * AAYADI ELMEHDI
-* DAHIR AMIN 
+* DAHER AMIN 
 
 # Explication
 Projet réalisé avec angular , material UI , flex-layout , highcharts pour angular et un base mongodb
  * BackOffice : Pour lancer le back il faut avoir mongo sur son poste , car il va permettre de créer la base de donnée
    *  npm install
    *  node server.js
- * FrontOffice : Il affiche au début les cas et donne la possibilité de faire la recherche selon les critéres , clique sur détail affiche information du cas ainsi que les temoignages du cas. Le Front contient une side bar avec menu qu'on peut caché et redimensionné notre page
+ * FrontOffice : Il affiche au début les cas et donne la possibilité de faire la recherche selon les critéres , clique sur détail affiche information du cas ainsi que les temoignages du cas. Le Front contient un sidebar avec menu qu'on peut caché et agrandir notre page, Le front contient un dashboard qui affichera graph et stats ( ex : pourcentage des cas par répartition )
    *  npm install
    *  ng serve
 
