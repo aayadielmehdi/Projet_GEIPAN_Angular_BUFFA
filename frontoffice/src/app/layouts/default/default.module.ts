@@ -28,6 +28,7 @@ import { DashboardService } from 'src/app/modules/dashboard.service';
 import { CasesComponent } from 'src/app/modules/cases/cases.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CasesService } from 'src/app/modules/cases.service';
+import { TemoignagesCasComponent } from 'src/app/modules/temoignages-cas/temoignages-cas.component';
 
 
 
@@ -37,7 +38,8 @@ import { CasesService } from 'src/app/modules/cases.service';
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    CasesComponent
+    CasesComponent,
+    TemoignagesCasComponent
   ],
   imports: [
     CommonModule,

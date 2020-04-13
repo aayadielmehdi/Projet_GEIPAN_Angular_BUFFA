@@ -30,7 +30,7 @@ export class CasesComponent implements OnInit {
   selectedAAAA: string
 
 
-  displayedColumns: string[] = ['cas_nom_dossier', 'cas_numEtude', 'date', 'zone', 'resume_web'];
+  displayedColumns: string[] = ['cas_nom_dossier', 'cas_numEtude', 'date', 'zone', 'resume_web', 'detail'];
   constructor(private cs: CasesService) { }
 
 
@@ -56,7 +56,7 @@ export class CasesComponent implements OnInit {
     return chainedequery
   }
 
-  QueryPaggination(){
+  QueryPaggination() {
     let chainedequery = ''
     chainedequery += `pagesize=${this.pageSize}&`
     chainedequery += `pageindex=${this.pageIndex}&`
@@ -65,9 +65,9 @@ export class CasesComponent implements OnInit {
 
 
   GetServerData(event?: PageEvent) {
-    
+
     // recuperation de nombre de ligne selon les critére de recherche
-    this.cs.GetCountCases(this.QueryRecherche()).subscribe( (data:any) => this.countCases = data.count)
+    this.cs.GetCountCases(this.QueryRecherche()).subscribe((data: any) => this.countCases = data.count)
 
     if (event !== undefined) {
       this.pageIndex = event.pageIndex

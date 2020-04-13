@@ -163,7 +163,7 @@
 
                 <!-- zone Column -->
                 <ng-container matColumnDef="zone">
-                    <th mat-header-cell *matHeaderCellDef width="20%"> Zone </th>
+                    <th mat-header-cell *matHeaderCellDef width="15%"> Zone </th>
                     <td mat-cell *matCellDef="let element"> ({{element.cas_zone_code}}){{element.cas_zone_nom}}</td>
                 </ng-container>
 
@@ -172,14 +172,27 @@
                     <th mat-header-cell *matHeaderCellDef width="30%"> Résume </th>
                     <td mat-cell *matCellDef="let element"> {{element.cas_resume_web}}</td>
                 </ng-container>
-                
+
+                <!-- affiche detail Column -->
+                <ng-container matColumnDef="detail">
+                    
+                    <th mat-header-cell *matHeaderCellDef width="5%"></th>
+                    <td mat-cell *matCellDef="let element">                
+                        <a text="Affiche Détail" routerLinkActive="list-item-active"  [routerLink]="['/cas',element._id]" >
+                            <mat-icon>info</mat-icon>
+                        </a>
+                    </td>
+
+                </ng-container>
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
 
             <div class="NoRow" *ngIf="dataSourceCases.length === 0"><strong>Aucun cas trouvé</strong></div>
 
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]"  [length]="countCases"  showFirstLastButtons (page)="GetServerData($event)" [pageSize]="pageSize">
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="countCases" showFirstLastButtons
+                (page)="GetServerData($event)" [pageSize]="pageSize">
             </mat-paginator>
         </div>
 

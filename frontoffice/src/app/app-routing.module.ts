@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { CasesComponent } from './modules/cases/cases.component'
+import { TemoignagesCasComponent } from './modules/temoignages-cas/temoignages-cas.component';
 
 const routes: Routes = [{
   path : '',
@@ -13,6 +14,9 @@ const routes: Routes = [{
   },{
     path : 'dashboard',
     component : DashboardComponent
+  },{
+    path : 'cas/:id',
+    component : TemoignagesCasComponent
   }]
 }];
 
