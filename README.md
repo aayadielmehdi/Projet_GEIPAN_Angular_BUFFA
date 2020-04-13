@@ -1,9 +1,19 @@
 # Projet_GEIPAN_Angular_BUFFA
 Depuis l'affaire Roswell les observations d'objets celestes non identifés se sont multipliées. En France, un organisme dépendant du CNES, le GEIPAN, mène des enquêtes sur chaque cas connu et rend public les résultats en OpenData. Vous pouvez consulter les archives ici : http://www.cnes-geipan.fr/. Les cas de type "D, D1 ou D2" sont les cas inexpliqués donc les plus intéressants :-)  Afin de nous amuser un peu avec ces données on ne peut plus sérieuses (le GEIPAN dépend du Centre National d'Etudes Spatiales et travaille avec l'armée et la gendarmerie nationale), vous allez devoir réaliser un serveur REST miroir hébergeant les données du GEIPAN, ainsi qu'un moteur de recherche client en React ou en Angular.
 
-# Réalisé
+# Réalisé Par
 * AAYADI ELMEHDI
 * DAHIR AMIN 
+
+# Explication
+Projet réalisé avec angular , material UI , flex-layout , highcharts pour angular et un base mongodb
+ * BackOffice : Pour lancer le back il faut avoir mongo sur son poste , car il va permettre de créer la base de donnée
+   *  npm install
+   *  node server.js
+ * FrontOffice : Il affiche au début les cas et donne la possibilité de faire la recherche selon les critéres , clique sur détail affiche information du cas ainsi que les temoignages du cas. Le Front contient une side bar avec menu qu'on peut caché et redimensionné notre page
+   *  npm install
+   *  ng serve
+
 # Travail à Faire
  * Récupérer les données sur cette page : http://www.cnes-geipan.fr/index.php?id=181&no_cache=1&tx_ttnews%5BbackPid%5D=211&tx_ttnews%5Btt_news%5D=330 il s'agit de fichiers .csv. Un autre fichier contient la description des différentes colonnes. La base se compose de deux collections liées : les cas et les témoignages. 
  * Vous devrez d'abord les importer dans MongoDB, réfléchissez bien car Mongo n'est pas une BD relationnelle. Il faudra peut-être merger ces données en une seule collection, ou bien, si vous conservez les deux collections, afficher un lien pour consulter dans la page affichant un témoignage le détail du cas d'observation, et vice versa : dans la page d'un cas, afficher un lien vers les témoignages.
