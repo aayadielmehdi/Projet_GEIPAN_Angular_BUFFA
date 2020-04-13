@@ -29,6 +29,7 @@ import { CasesComponent } from 'src/app/modules/cases/cases.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CasesService } from 'src/app/modules/cases.service';
 import { TemoignagesCasComponent } from 'src/app/modules/temoignages-cas/temoignages-cas.component';
+import { TemoignagesCasService } from 'src/app/modules/temoignages-cas.service';
 
 
 
@@ -62,7 +63,8 @@ import { TemoignagesCasComponent } from 'src/app/modules/temoignages-cas/temoign
   ],
   providers: [
     CasesService,
-    DashboardService
+    DashboardService,
+    TemoignagesCasService
   ]
 })
 export class DefaultModule { }

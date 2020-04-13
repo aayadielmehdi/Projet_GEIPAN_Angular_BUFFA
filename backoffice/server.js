@@ -121,7 +121,7 @@ app.get('/api/cases', function (req, res) {
 
     // console.log(query)
 
-    mongoDBModule.EnsembleDesCas(pageindex ,pagesize ,query, function (data) {
+    mongoDBModule.EnsembleDesCas(pageindex, pagesize, query, function (data) {
         var objdData = {
             msg: "Cas trouvés avec succès",
             data: data
@@ -131,8 +131,8 @@ app.get('/api/cases', function (req, res) {
 });
 
 // Récupération du count des cas
-app.get('/api/cases/count', function (req, res) {    
-   
+app.get('/api/cases/count', function (req, res) {
+
     let annee = req.query.annee;
     let mois = req.query.mois;
     let jour = req.query.jour;
@@ -174,7 +174,21 @@ app.get('/api/cases/:id', function (req, res) {
 // Récupération des temoignages cas by id_cas
 app.get('/api/cas-temoignages/:id', function (req, res) {
     var id = req.params.id;
-    mongoDBModule.EnsembleDesTemByIdCas(id, function (data) {
+
+    // numero de la page     
+    let pageindex = parseInt(req.query.pageindex);
+    // taille du tableau 
+    let pagesize = parseInt(req.query.pagesize);
+
+    mongoDBModule.EnsembleDesTemByIdCas(pageindex, pagesize, id, function (data) {
+        res.send(JSON.stringify(data));
+    });
+});
+
+// Récupération du count des tem by id_cas
+app.get('/api/cas-temoignages/count/:id', function (req, res) {
+    var id = req.params.id;
+    mongoDBModule.CountDesTemByIdCas(id, function (data) {
         res.send(JSON.stringify(data));
     });
 });

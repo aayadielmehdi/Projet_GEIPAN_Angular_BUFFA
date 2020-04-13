@@ -20,7 +20,7 @@ exports.connexionMongo = function (callback) {
 }
 
 // Récupération de tous les cas 
-exports.EnsembleDesCas = function (pageindex,pagesize,query, callback) {
+exports.EnsembleDesCas = function (pageindex, pagesize, query, callback) {
 	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
 		var db = client.db(dbName);
 		if (!err) {
@@ -37,13 +37,13 @@ exports.EnsembleDesCas = function (pageindex,pagesize,query, callback) {
 }
 
 // count de l'ensemble des cas selon critère de recherche
-exports.CountCases = function(query, callback) {
+exports.CountCases = function (query, callback) {
 	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
 		var db = client.db(dbName);
 		if (!err) {
 			db.collection(variable.collection_cas)
 				.find(query)
-				.count()				
+				.count()
 				.then(arr => callback(arr))
 		} else {
 			callback(-1)
@@ -95,14 +95,32 @@ exports.CasById = function (id, callback) {
 }
 
 // Récupération des temoignages du cas
-exports.EnsembleDesTemByIdCas = function (id, callback) {
+exports.EnsembleDesTemByIdCas = function (pageindex, pagesize, id, callback) {
 	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
 		var db = client.db(dbName);
 		if (!err) {
 			let myquery = { "id_cas": id };
 			db.collection(variable.collection_tem)
 				.find(myquery)
+				.skip(pageindex * pagesize)
+				.limit(pagesize)
 				.toArray()
+				.then(arr => callback(arr))
+		} else {
+			callback(-1)
+		}
+	})
+}
+
+// count des ensemble des temoigne selon id_cas
+exports.CountDesTemByIdCas = function (id, callback) {
+	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+		var db = client.db(dbName);
+		if (!err) {
+			let myquery = { "id_cas": id };
+			db.collection(variable.collection_tem)
+				.find(myquery)
+				.count()
 				.then(arr => callback(arr))
 		} else {
 			callback(-1)

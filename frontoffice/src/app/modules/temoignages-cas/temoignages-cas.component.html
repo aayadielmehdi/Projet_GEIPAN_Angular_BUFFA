@@ -1,1 +1,123 @@
-<p>temoignages-cas works! {{id}}</p>
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Information et tempoignages du cas = {{id_cas}}
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+
+
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nom Dossier</mat-label>
+                    <input matInput [value]="nomDossier" disabled>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Numéro d'étude</mat-label>
+                    <input matInput [value]="numEtude" disabled>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Zone</mat-label>
+                    <input matInput [value]="zone" disabled>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Zone Type</mat-label>
+                    <input matInput [value]="zoneType" disabled>
+                </mat-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Cas Date</mat-label>
+                    <input matInput [value]="date" disabled>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Date MAJ</mat-label>
+                    <input matInput [value]="dateMAJ" disabled>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Résumé</mat-label>
+                    <textarea rows="3" matInput [value]="resume" disabled></textarea>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+</mat-expansion-panel>
+
+<br>
+<mat-divider></mat-divider>
+<br>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+
+    <div fxFlex="100">
+        <!-- c'est mieux de le mettre en component comment les autres :) -->
+
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSourceTems">
+
+                <!-- _id Column  object id -->
+                <ng-container matColumnDef="obs_date_heure">
+                    <th mat-header-cell *matHeaderCellDef width="25%"> Date Heure Obs. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.obs_date_heure}} </td>
+                </ng-container>
+
+                <!-- _id_cas Column -->
+                <ng-container matColumnDef="obs_duree_hms">
+                    <th mat-header-cell *matHeaderCellDef width="25%"> Durée Obs. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.obs_duree_hms}} </td>
+                </ng-container>
+
+                <!-- nom_dossier Column -->
+                <ng-container matColumnDef="obs_continuite_type">
+                    <th mat-header-cell *matHeaderCellDef width="25%"> Continuité type </th>
+                    <td mat-cell *matCellDef="let element"> {{element.obs_continuite_type}} </td>
+                </ng-container>
+
+                <!-- num_etude Column -->
+                <ng-container matColumnDef="tem_resume">
+                    <th mat-header-cell *matHeaderCellDef width="25%"> Résumé </th>
+                    <td mat-cell *matCellDef="let element"> {{element.tem_resume}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <div class="NoRow" *ngIf="dataSourceTems.length === 0"><strong>Aucun Tem. trouvé</strong></div>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="countTem" showFirstLastButtons
+                (page)="GetServerData($event)" [pageSize]="pageSize">
+            </mat-paginator>
+        </div>
+
+
+    </div>
+</div>
+
+<br>
+<mat-divider></mat-divider>
+<br>

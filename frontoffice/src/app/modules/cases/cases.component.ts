@@ -63,7 +63,6 @@ export class CasesComponent implements OnInit {
     return chainedequery
   }
 
-
   GetServerData(event?: PageEvent) {
 
     // recuperation de nombre de ligne selon les critére de recherche
