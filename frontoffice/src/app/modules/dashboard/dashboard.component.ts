@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.bigChart = this.ds.bigChart();
+    console.log(this.bigChart);
     this.pieChart = this.ds.pieChart()
   }
 

@@ -273,13 +273,11 @@ exports.RepartitionParZoneNom = function (callback) {
 	if(!err) {
 		db.collection(variable.collection_cas)
 		.aggregate([
-			{
-				$group: {
-					_id: "$cas_zone_code",
-					count : { $sum: 1 }
-				}
-			}
-		])
+			{$group:{_id:"$cas_zone_nom",
+			count:{$sum : 1}}
+		    } , 
+			{$sort:{"_id":1}}
+        ])
 		.toArray()
 		.then(arr => callback(arr))
 	} else {
