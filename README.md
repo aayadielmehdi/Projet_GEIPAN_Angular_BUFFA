@@ -10,7 +10,8 @@ Projet réalisé avec angular , material UI , flex-layout , highcharts pour angu
  * BackOffice : Pour lancer le back il faut avoir mongo sur son poste , car il va permettre de créer la base de donnée
    *  npm install
    *  node server.js
- * FrontOffice : Il affiche au début les cas et donne la possibilité de faire la recherche selon les critéres , clique sur détail affiche information du cas ainsi que les temoignages du cas. Le Front contient une side bar avec menu qu'on peut caché et redimensionné notre page
+ * FrontOffice : Il affiche au début les cas et donne la possibilité de faire la recherche selon les critéres , clique sur détail affiche information du cas ainsi que les temoignages du cas. Le Front contient une side bar avec menu qu'on peut caché et redimensionné notre page.
+   *  Demo highcharts https://github.com/highcharts/highcharts-angular#demo-app
    *  npm install
    *  ng serve
 

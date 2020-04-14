@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
+// demo du highschart-angular
+// https://github.com/highcharts/highcharts-angular#demo-app
 
 @Component({
   selector: 'app-widget-area',

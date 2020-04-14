@@ -3,6 +3,9 @@ import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
 
+// demo du highschart-angular
+// https://github.com/highcharts/highcharts-angular#demo-app
+
 @Component({
   selector: 'app-widget-pie',
   templateUrl: './pie.component.html',
@@ -12,7 +15,7 @@ import HC_exporting from 'highcharts/modules/exporting';
 export class PieComponent implements OnInit {
 
   chartOptions = {}
-
+  
   Highcharts = Highcharts;
 
   @Input() data = []
@@ -68,6 +71,13 @@ export class PieComponent implements OnInit {
 
     };
 
+
+    console.log("(AAYADI) Erreur au niveau du dashbord vient de mise a jour data graphe , le binding auto ne marche pas !!")
+    console.log("(AAYADI) J'ai utilisé le update comme documentation mais :/ !!")
+    this.Highcharts.charts[0].update
+
+
+
     // permettre de faire l'exportation de mon graph
     HC_exporting(this.Highcharts);
 
@@ -80,15 +90,7 @@ export class PieComponent implements OnInit {
     }, 300);
 
 
-  }
 
-
-  // le binding ne marche pas avec highchart faut faire le setData
-  ngAfterContentInit(): void {    
-    //this.chartOptions.series[0].setData(this.data)
-    console.log("(AAYADI) Erreur au niveau du dashbord vient de mise a jour data graphe , le binding auto ne marche pas !!")
-    this.Highcharts.Series[0].setData(this.data)
-    
   }
 
 }
