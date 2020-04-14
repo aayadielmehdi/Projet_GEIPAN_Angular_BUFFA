@@ -3,7 +3,7 @@ Depuis l'affaire Roswell les observations d'objets celestes non identifés se so
 
 # Réalisé Par
 * AAYADI ELMEHDI
-* DAHER AMIN 
+* DAHER AHMED AMIN 
 
 # Explication
 Projet réalisé avec angular , material UI , flex-layout , highcharts pour angular et un base mongodb
