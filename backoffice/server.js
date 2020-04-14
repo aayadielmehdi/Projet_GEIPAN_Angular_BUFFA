@@ -242,3 +242,10 @@ app.get('/api/RepCasParClassification',function(req,res){
         res.send(JSON.stringify(data));
     });
 })
+
+// Répartition cas par zone
+app.get('/api/RepartitionCasParZoneNom', function(req,res){
+    mongoDBModule.RepartitionParZoneNom(function (data) {
+        res.send(JSON.stringify(data));
+    })
+})

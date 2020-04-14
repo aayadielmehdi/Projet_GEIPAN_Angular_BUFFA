@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
-// demo du highschart-angular
-// https://github.com/highcharts/highcharts-angular#demo-app
 
 @Component({
   selector: 'app-widget-area',
@@ -27,11 +25,9 @@ export class AreaComponent implements OnInit {
         type: 'area'
       },
       title: {
-        text: 'Random Test'
+        text: 'Statistiques par département '
       },
-      subtitle: {
-        text: 'Mn Walou'
-      },
+     
       tooltip: {
         split: true,
         valueSuffix: ' MMM '

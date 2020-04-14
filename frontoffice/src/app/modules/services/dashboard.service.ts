@@ -16,8 +16,26 @@ export class DashboardService {
     return this.http.get(this.urlapi + '/api/RepCasParClassification')
   }
 
+  RepresentationCasParZoneNom() {
+    return this.http.get(this.urlapi + '/api/RepresentationCasParZoneNom')
+  }
+
   bigChart() {
-    return [{
+
+    var table: any = []
+    this.RepresentationCasParZoneNom().subscribe((data: any) => {
+      data.forEach(element => {
+        table.push({
+          name: element._id,
+          y: element.count
+        })
+      });
+
+    })
+
+
+    return table  
+    /*return [{
       name: 'Asia',
       data: [502, 635, 809, 947, 1402, 3634, 5268]
     }, {
@@ -32,7 +50,7 @@ export class DashboardService {
     }, {
       name: 'Oceania',
       data: [2, 2, 2, 6, 13, 30, 46]
-    }];
+    }];*/
   }
 
   pieChart() {

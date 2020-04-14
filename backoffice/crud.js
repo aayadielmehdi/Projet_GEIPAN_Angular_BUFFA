@@ -265,3 +265,25 @@ exports.RepartitionCasParClassification = function (callback) {
 		}
 	})
 }
+
+// Count zone_nom
+exports.RepartitionParZoneNom = function (callback) {
+	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+	var db = client.db(dbName);
+	if(!err) {
+		db.collection(variable.collection_cas)
+		.aggregate([
+			{
+				$group: {
+					_id: "$cas_zone_code",
+					count : { $sum: 1 }
+				}
+			}
+		])
+		.toArray()
+		.then(arr => callback(arr))
+	} else {
+		callback(-1)
+	}
+	})
+}
