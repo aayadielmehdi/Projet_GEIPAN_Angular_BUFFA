@@ -13,7 +13,6 @@ import { MatMenuModule} from '@angular/material/menu'
 import { MatListModule } from '@angular/material/list'
 import { RouterModule } from '@angular/router';
 import { AreaComponent } from './widgets/area/area.component';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { PieComponent } from './widgets/pie/pie.component'
 
 @NgModule({
@@ -29,8 +28,7 @@ import { PieComponent } from './widgets/pie/pie.component'
     FlexLayoutModule,
     MatMenuModule,
     MatListModule,
-    RouterModule,
-    HighchartsChartModule
+    RouterModule
   ],
   exports : [ // afin de les utiliser dans une autre module
     HeaderComponent, FooterComponent , SidebarComponent , AreaComponent , PieComponent

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import HC_exporting from 'highcharts/modules/exporting';
-
+import * as Highcharts_pie from 'highcharts';
+import { DashboardService } from 'src/app/modules/services/dashboard.service';
 
 // demo du highschart-angular
 // https://github.com/highcharts/highcharts-angular#demo-app
@@ -14,72 +13,70 @@ import HC_exporting from 'highcharts/modules/exporting';
 
 export class PieComponent implements OnInit {
 
-  chartOptions = {}
-  
-  Highcharts = Highcharts;
+  constructor(private ds: DashboardService) { }
 
-  @Input() data = []
 
-  constructor() { }
+  public chartOptions: any = {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Stats des cas'
+    },
+    subtitle: {
+      text: 'Répartition par classification'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%'
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+      }
+    },
+    exporting: {
+      enabled: true,
+    },
+    credits: {
+      enabled: false,
+    },
+    series: [{
+      name: 'Classification',
+      colorByPoint: true,
+      data: []
+    }]
+  };
+
 
   ngOnInit(): void {
 
-    // console.log(this.data)
+    var table: any = []
 
-    this.chartOptions = {
-      chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-      },
-      title: {
-        text: 'Stats par types de cas'
-      },
-      subtitle: {
-        text: 'Répartition par classification'
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      accessibility: {
-        point: {
-          valueSuffix: '%'
-        }
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-          }
-        }
-      },
-      exporting: {
-        enabled: true,
-      },
-      credits: {
-        enabled: false,
-      },
-      series: [{
-        name: 'Pourcentage',
-        colorByPoint: true,
-        data: this.data
-      }]
+    // le traitement je l'ai fait ici pour recupération des data (quand je l'ai fait en dashbord service , et passer @input to piechart ne marche pas)
+    this.ds.RepresentationCasParClassification().subscribe((data: any) => {
+      data.forEach(element => {
+        table.push({
+          name: element._id,
+          y: element.count
+        })
+      });
+      this.chartOptions.series[0].data = table
+      Highcharts_pie.chart('container_pie', this.chartOptions)
+    })
 
-    };
-
-
-    console.log("(AAYADI) Erreur au niveau du dashbord vient de mise a jour data graphe , le binding auto ne marche pas !!")
-    console.log("(AAYADI) J'ai utilisé le update comme documentation mais :/ !!")
-    this.Highcharts.charts[0].update
-
-
-
-    // permettre de faire l'exportation de mon graph
-    HC_exporting(this.Highcharts);
 
 
     // redimentionnement de la charte ou du componenet
@@ -89,8 +86,7 @@ export class PieComponent implements OnInit {
       );
     }, 300);
 
-
-
   }
+
 
 }

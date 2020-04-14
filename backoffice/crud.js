@@ -252,13 +252,13 @@ exports.RepartitionCasParClassification = function (callback) {
 			db.collection(variable.collection_cas)
 				.aggregate([
 					{
-						$group:{
-							_id : "$cas_classification",
-							count : { $sum : 1 }
+						$group: {
+							_id: "$cas_classification",
+							count: { $sum: 1 }
 						}
 					}
 				])
-				.toArray()				
+				.toArray()
 				.then(arr => callback(arr))
 		} else {
 			callback(-1)
@@ -269,19 +269,22 @@ exports.RepartitionCasParClassification = function (callback) {
 // Count zone_nom
 exports.RepartitionParZoneNom = function (callback) {
 	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
-	var db = client.db(dbName);
-	if(!err) {
-		db.collection(variable.collection_cas)
-		.aggregate([
-			{$group:{_id:"$cas_zone_nom",
-			count:{$sum : 1}}
-		    } , 
-			{$sort:{"_id":1}}
-        ])
-		.toArray()
-		.then(arr => callback(arr))
-	} else {
-		callback(-1)
-	}
+		var db = client.db(dbName);
+		if (!err) {
+			db.collection(variable.collection_cas)
+				.aggregate([
+					{
+						$group: {
+							_id: "$cas_zone_nom",
+							count: { $sum: 1 }
+						}
+					},
+					{ $sort: { "_id": 1 } }
+				])
+				.toArray()
+				.then(arr => callback(arr))
+		} else {
+			callback(-1)
+		}
 	})
 }
